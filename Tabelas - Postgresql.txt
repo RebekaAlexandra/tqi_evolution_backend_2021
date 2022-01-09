@@ -1,0 +1,28 @@
+create table Usuarios
+(
+	nome varchar(200) not null,
+	cpf varchar not null,
+	rg varchar not null,
+	endereco text not null,
+	renda numeric not null, 
+	email varchar(200) not null,
+	senha varchar(200) not null,
+	
+	constraint pk_email  primary key (email)
+);
+
+create table Emprestimos
+(
+	fk_email varchar,
+	id_emprestimos serial,
+	valor_emprestimo numeric not null,
+	primeira_parcela date not null,
+	quantidade_parcelas integer not null,
+	renda numeric not null,
+	
+	constraint pk_id_emprestimos primary key (id_emprestimos), 
+	
+	constraint fk_email FOREIGN KEY (fk_email)
+        references usuarios (email) MATCH SIMPLE
+        on UPDATE NO ACTION ON DELETE NO ACTION
+);
